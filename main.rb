@@ -9,7 +9,7 @@ loader = Zeitwerk::Loader.new
 loader.push_dir('./services')
 loader.setup
 
-module RedCanary
+module Main
   COMMAND_FILE_NAME = './test.txt'
   DEFAULT_LOG_FILE = './logs/logs.txt'
 
