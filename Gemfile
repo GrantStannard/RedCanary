@@ -12,6 +12,6 @@ gem 'rubocop', '~> 1.58'
 
 gem 'rspec', '~> 3.12'
 
-gem "open3", "~> 0.2.0"
+gem 'open3', '~> 0.2.0'
 
-gem "webmock", "~> 3.19"
+gem 'webmock', '~> 3.19'

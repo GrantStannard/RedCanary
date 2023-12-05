@@ -4,33 +4,26 @@ require 'logger'
 require 'json'
 
 module Logging
-  def self.logger(output_location: "./log.txt", level: nil)
+  DEFAULT_LOG_FILE = './logs/logs.txt'
+
+  def self.logger(output_location: DEFAULT_LOG_FILE)
     @logger ||= Logger.new(output_location, formatter:)
   end
 
-  def self.log_process(process: {})
-    logger.info({ process: })
-  end
-
-  def self.log_file(activity:, file_path:)
-    logger.info({ activity:, file_path: })
-  end
-
-  def self.log_network(address:, port:, data_size:)
-    logger.info({ address:, port:, data_size: })
-
+  def self.log(msg)
+    logger.info(**msg)
   end
 
   def self.formatter
-    proc do |severity, datetime, _progname, msg|
-      date_format = datetime.strftime("%Y-%m-%d %H:%M:%S")
+    proc do |_severity, datetime, _progname, msg|
+      date_format = datetime.strftime('%Y-%m-%d %H:%M:%S')
       JSON.dump({
-                  date: "#{date_format}",
-                 severity:"#{severity.ljust(5)}",
-                 pid:"##{Process.pid}",
-                 user: Process.uid,
-                 process_name: $PROGRAM_NAME,
-                  **msg}) + "\n"
+                  date: date_format.to_s,
+                  pid: "##{Process.pid}",
+                  user: Process.uid,
+                  process_name: $PROGRAM_NAME,
+                  **msg
+                }) + "\n"
     end
   end
 end
