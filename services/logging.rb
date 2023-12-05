@@ -4,7 +4,7 @@ require 'logger'
 require 'json'
 
 module Logging
-  def self.logger(output_location: "./log.json", level: nil)
+  def self.logger(output_location: "./log.txt", level: nil)
     @logger ||= Logger.new(output_location, formatter:)
   end
 
